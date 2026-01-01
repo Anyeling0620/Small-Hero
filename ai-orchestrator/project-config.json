@@ -1,0 +1,265 @@
+{
+  "projectName": "Small Hero Clone",
+  "projectDescription": "AI 全自动开发的小小勇者高仿游戏",
+  "version": "0.1.0",
+  "targetSimilarity": 0.95,
+  "currentStatus": {
+    "phase": "foundation",
+    "completionPercentage": 5,
+    "currentFeatures": [
+      "项目结构初始化",
+      "数据库架构设计"
+    ],
+    "nextMilestone": "核心战斗系统实现"
+  },
+  "gameFeaturePriority": [
+    {
+      "id": "combat-system",
+      "name": "战斗系统",
+      "priority": 1,
+      "description": "服务器时刻驱动的挂机战斗，包括攻击、技能、暴击等机制",
+      "estimatedLines": 1500,
+      "dependencies": []
+    },
+    {
+      "id": "attribute-system",
+      "name": "属性系统",
+      "priority": 1,
+      "description": "力量、敏捷、智力等一级属性，以及攻击力、防御力等二级属性计算",
+      "estimatedLines": 800,
+      "dependencies": []
+    },
+    {
+      "id": "equipment-system",
+      "name": "装备系统",
+      "priority": 2,
+      "description": "装备穿戴、强化、品质系统",
+      "estimatedLines": 1200,
+      "dependencies": ["attribute-system"]
+    },
+    {
+      "id": "skill-system",
+      "name": "技能系统",
+      "priority": 2,
+      "description": "主动技能、被动技能、技能升级",
+      "estimatedLines": 1500,
+      "dependencies": ["combat-system"]
+    },
+    {
+      "id": "hero-system",
+      "name": "英雄系统",
+      "priority": 3,
+      "description": "英雄招募、升级、转职",
+      "estimatedLines": 1000,
+      "dependencies": ["attribute-system", "equipment-system"]
+    },
+    {
+      "id": "dungeon-system",
+      "name": "副本系统",
+      "priority": 3,
+      "description": "关卡设计、怪物配置、掉落系统",
+      "estimatedLines": 2000,
+      "dependencies": ["combat-system", "equipment-system"]
+    },
+    {
+      "id": "currency-system",
+      "name": "货币系统",
+      "priority": 4,
+      "description": "金币、钻石、以太货币等多种货币",
+      "estimatedLines": 600,
+      "dependencies": []
+    },
+    {
+      "id": "shop-system",
+      "name": "商店系统",
+      "priority": 4,
+      "description": "道具购买、刷新机制",
+      "estimatedLines": 800,
+      "dependencies": ["currency-system"]
+    },
+    {
+      "id": "statue-system",
+      "name": "雕像系统",
+      "priority": 5,
+      "description": "后期增幅系统，包括各种雕像效果",
+      "estimatedLines": 1000,
+      "dependencies": ["attribute-system", "currency-system"]
+    },
+    {
+      "id": "achievement-system",
+      "name": "成就系统",
+      "priority": 5,
+      "description": "成就解锁和奖励",
+      "estimatedLines": 700,
+      "dependencies": []
+    }
+  ],
+  "qualityRules": {
+    "minCodeLinesPerTask": 200,
+    "maxCodeLinesPerTask": 2000,
+    "requireUnitTests": true,
+    "requireApiDocUpdate": true,
+    "requireFrontendBackendSync": true,
+    "testCoverageMinimum": 80,
+    "disallowedPatterns": [
+      "TODO",
+      "FIXME",
+      "console.log",
+      "System.out.println"
+    ]
+  },
+  "scraperConfig": {
+    "enabled": true,
+    "sources": [
+      {
+        "name": "TapTap",
+        "url": "https://www.taptap.cn/app/233851",
+        "type": "game-info",
+        "frequency": "daily"
+      },
+      {
+        "name": "Reddit",
+        "url": "https://www.reddit.com/r/TinyRogues/",
+        "type": "community",
+        "frequency": "daily"
+      },
+      {
+        "name": "Bilibili",
+        "url": "https://space.bilibili.com/search",
+        "keywords": ["小小勇者", "tiny hero", "游戏攻略"],
+        "type": "video-content",
+        "frequency": "daily"
+      }
+    ],
+    "outputPath": "docs/game-research/daily-reports/",
+    "analysisEnabled": true
+  },
+  "aiModelConfig": {
+    "architect": {
+      "primary": {
+        "model": "gemini-2.5-flash-latest",
+        "apiKeySecret": "GEMINI_API_KEY",
+        "temperature": 0.7,
+        "maxTokens": 8000
+      },
+      "fallback": {
+        "model": "deepseek-chat",
+        "apiKeySecret": "DEEPSEEK_API_KEY",
+        "temperature": 0.7,
+        "maxTokens": 8000,
+        "baseUrl": "https://api.deepseek.com/v1"
+      },
+      "retryAttempts": 3,
+      "retryDelay": 5000
+    },
+    "backendDev": {
+      "primary": {
+        "model": "github-copilot",
+        "apiKeySecret": "GH_PAT",
+        "useWorkspaceContext": true
+      },
+      "fallback": {
+        "model": "deepseek-coder",
+        "apiKeySecret": "DEEPSEEK_API_KEY",
+        "baseUrl": "https://api.deepseek.com/v1"
+      },
+      "retryAttempts": 3,
+      "retryDelay": 5000
+    },
+    "frontendDev": {
+      "primary": {
+        "model": "gemini-2.5-flash-latest",
+        "apiKeySecret": "GEMINI_API_KEY",
+        "temperature": 0.6,
+        "maxTokens": 6000
+      },
+      "fallback": {
+        "model": "deepseek-chat",
+        "apiKeySecret": "DEEPSEEK_API_KEY",
+        "temperature": 0.6,
+        "maxTokens": 6000,
+        "baseUrl": "https://api.deepseek.com/v1"
+      },
+      "retryAttempts": 3,
+      "retryDelay": 5000
+    },
+    "qaTester": {
+      "primary": {
+        "model": "gemini-2.5-pro-latest",
+        "apiKeySecret": "GEMINI_API_KEY",
+        "temperature": 0.3,
+        "maxTokens": 4000
+      },
+      "fallback": {
+        "model": "deepseek-chat",
+        "apiKeySecret": "DEEPSEEK_API_KEY",
+        "temperature": 0.3,
+        "maxTokens": 4000,
+        "baseUrl": "https://api.deepseek.com/v1"
+      },
+      "retryAttempts": 3,
+      "retryDelay": 5000
+    }
+  },
+  "notifications": {
+    "enabled": true,
+    "pushplus": {
+      "enabled": true,
+      "tokenSecret": "PUSHPLUS_TOKEN",
+      "channel": "wechat",
+      "template": "html",
+      "webhookUrl": "http://www.pushplus.plus/send"
+    },
+    "channels": ["github-issues", "pushplus"],
+    "events": {
+      "taskCreated": true,
+      "taskCompleted": true,
+      "taskFailed": true,
+      "prCreated": true,
+      "testPassed": true,
+      "testFailed": true,
+      "dailyReport": true
+    }
+  },
+  "concurrencyControl": {
+    "enabled": true,
+    "maxConcurrentTasks": 3,
+    "maxConcurrentPerType": {
+      "backend": 2,
+      "frontend": 2,
+      "qa": 1
+    },
+    "lockTimeout": 3600000,
+    "lockFile": ".github/.task-lock.json"
+  },
+  "taskGeneration": {
+    "dailyTaskCount": {
+      "min": 5,
+      "max": 10,
+      "backend": 3,
+      "frontend": 3,
+      "qa": 2
+    },
+    "executionSchedule": {
+      "times": ["09:00", "13:00", "17:00", "21:00"],
+      "timezone": "UTC+8",
+      "enabled": true
+    },
+    "priorityDistribution": {
+      "high": 0.4,
+      "medium": 0.4,
+      "low": 0.2
+    }
+  },
+  "database": {
+    "type": "tidb-cloud",
+    "secrets": {
+      "host": "DB_HOST",
+      "port": "DB_PORT",
+      "name": "DB_NAME",
+      "user": "DB_USER",
+      "password": "DB_PASSWORD",
+      "url": "SPRING_DATASOURCE_URL"
+    }
+  }
+}

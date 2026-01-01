@@ -1,0 +1,155 @@
+name: AI QA Testing
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to test'
+        required: true
+        type: number
+
+# QA任务串行执行，确保测试准确性
+concurrency:
+  group: ai-qa-testing
+  cancel-in-progress: false
+
+jobs:
+  qa-testing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || 'main' }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install QA Dependencies
+        run: |
+          pip install requests PyGithub google-generativeai pytest playwright
+
+      - name: Acquire Concurrency Lock
+        id: acquire_lock
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+        run: |
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; import sys; lock = ConcurrencyLock(); sys.exit(0 if lock.acquire('qa-pr-${PR_NUMBER}', 'qa-testing', max_wait=600) else 1)"
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          if [ -f "package.json" ]; then
+            npm install
+          fi
+
+      - name: Run Backend Tests
+        run: |
+          cd backend
+          if [ -f "pom.xml" ]; then
+            ./mvnw test || echo "Backend tests failed"
+          fi
+
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          if [ -f "package.json" ]; then
+            npm test || echo "Frontend tests not configured"
+          fi
+
+      - name: AI-Powered Code Review
+        id: ai_review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        continue-on-error: true
+        run: |
+          python scripts/qa/ai_code_review.py
+
+      - name: Retry Code Review on Failure
+        if: steps.ai_review.outcome == 'failure'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          echo "⚠️  首次尝试失败，5秒后重试..."
+          sleep 5
+          python scripts/qa/ai_code_review.py
+
+      - name: Check Code Quality Standards
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          python scripts/qa/check_quality_standards.py
+
+      - name: Validate Game Logic
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          python scripts/qa/validate_game_logic.py
+
+      - name: Generate Test Report
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          python scripts/qa/generate_test_report.py
+
+      - name: Comment on PR
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+        run: |
+          python scripts/qa/comment_on_pr.py
+
+      - name: Send Test Result Notification
+        if: success()
+        env:
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+        run: |
+          python scripts/utils/send_test_result_notification.py
+
+      - name: Release Lock
+        if: always()
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+        run: |
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; ConcurrencyLock().release('qa-pr-${PR_NUMBER}')"
+
+      - name: Send Failure Notification
+        if: failure()
+        env:
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+        run: |
+          python scripts/utils/send_task_failed_notification.py

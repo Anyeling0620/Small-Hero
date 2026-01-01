@@ -1,0 +1,136 @@
+{
+  "members": [
+    {
+      "id": "architect",
+      "name": "架构师 (Chief Architect)",
+      "aiModel": "gemini-2.0-flash-exp",
+      "responsibilities": [
+        "每日定时爬取小小勇者游戏相关资讯和玩法内容",
+        "分析游戏当前版本的战斗逻辑、数值系统、UI/UX设计",
+        "制定技术演进路线图，确保复刻度达到90%以上",
+        "分配任务给前端、后端、测试团队",
+        "审核所有代码变更，确保符合硬性规定",
+        "管理游戏版本演进，决定下一步开发方向"
+      ],
+      "workSchedule": {
+        "dailyTrigger": "09:00 UTC+8",
+        "tasks": [
+          "爬取游戏资讯（TapTap、Reddit、Discord、B站等）",
+          "分析游戏更新日志和玩家反馈",
+          "评估当前项目完成度",
+          "生成本日开发任务池",
+          "分配任务到各团队成员"
+        ]
+      },
+      "qualityGates": {
+        "minCodeLinesPerTask": 200,
+        "requireTests": true,
+        "requireApiSpecUpdate": true,
+        "requireFrontendBackendSync": true
+      },
+      "dataSource": {
+        "sources": [
+          "https://www.taptap.cn/app/233851",
+          "https://www.reddit.com/r/TinyRogues/",
+          "https://discord.com/invite/tinyhero",
+          "https://space.bilibili.com/search?keyword=小小勇者"
+        ],
+        "updateFrequency": "daily",
+        "storageLocation": "docs/game-research/"
+      }
+    },
+    {
+      "id": "backend-dev",
+      "name": "后端开发 (Backend Developer)",
+      "aiModel": "github-copilot-pro",
+      "responsibilities": [
+        "实现 Spring Boot 后端服务",
+        "设计和实现数据库 Schema",
+        "实现游戏核心逻辑（战斗系统、装备系统、技能系统等）",
+        "实现服务器时刻(Tick)驱动的挂机收益计算",
+        "编写单元测试和集成测试",
+        "更新 OpenAPI 规范文档"
+      ],
+      "techStack": [
+        "Java 17+",
+        "Spring Boot 3.x",
+        "Spring Data JPA",
+        "TiDB Cloud (MySQL兼容)",
+        "Redis (缓存)",
+        "WebSocket (实时通信)"
+      ],
+      "codingStandards": "docs/team/BE_CODING_STANDARD.md",
+      "minCodeChangePerCommit": 200,
+      "testCoverageTarget": 80
+    },
+    {
+      "id": "frontend-dev",
+      "name": "前端开发 (Frontend Developer)",
+      "aiModel": "gemini-2.0-flash-exp",
+      "responsibilities": [
+        "实现 React 前端界面",
+        "复刻小小勇者的 UI/UX 设计风格",
+        "实现游戏动画和特效",
+        "创建和管理素材库（图标、角色、装备等）",
+        "实现响应式设计，支持移动端",
+        "集成 Capacitor 实现原生 App 功能"
+      ],
+      "techStack": [
+        "React 18+",
+        "TypeScript",
+        "Vite",
+        "TailwindCSS",
+        "Framer Motion (动画)",
+        "React Query (数据获取)",
+        "Zustand (状态管理)",
+        "Capacitor (移动端)",
+        "UI-UX-Pro-Max-Skill (UI组件库)"
+      ],
+      "uiReference": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+      "codingStandards": "docs/team/FE_CODING_STANDARD.md",
+      "minCodeChangePerCommit": 150,
+      "assetManagement": {
+        "enabled": true,
+        "assetTypes": ["sprites", "icons", "backgrounds", "animations"],
+        "assetLibraryPath": "frontend/src/assets/game"
+      }
+    },
+    {
+      "id": "qa-tester",
+      "name": "测试工程师 (QA Engineer)",
+      "aiModel": "gemini-1.5-pro",
+      "responsibilities": [
+        "编写和执行自动化测试",
+        "进行游戏逻辑验证",
+        "对比原版游戏进行相似度测试",
+        "性能测试和负载测试",
+        "UI/UX 一致性检查",
+        "生成测试报告"
+      ],
+      "testingScope": [
+        "单元测试 (JUnit, Jest)",
+        "集成测试 (Spring Test)",
+        "E2E测试 (Playwright)",
+        "数值验证测试",
+        "UI视觉回归测试"
+      ],
+      "qaChecklist": "docs/team/QA_CHECKLIST.md",
+      "testReportPath": "docs/test-reports/"
+    }
+  ],
+  "collaboration": {
+    "taskAssignmentStrategy": "architect-driven",
+    "communicationChannel": "GitHub Issues + PR Comments",
+    "codeReviewRequired": true,
+    "minimumReviewers": 1,
+    "autoMergeEnabled": false
+  },
+  "git": {
+    "username": "Anyeling0620",
+    "email": "3463645195@qq.com",
+    "defaultBranch": "main",
+    "featureBranchPrefix": "feature/",
+    "hotfixBranchPrefix": "hotfix/",
+    "commitMessageFormat": "[{member-id}] {type}: {description}"
+  }
+}

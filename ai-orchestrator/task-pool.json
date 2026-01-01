@@ -1,0 +1,29 @@
+{
+  "taskPool": [],
+  "completedTasks": [],
+  "taskGenerationRules": {
+    "minCodeLines": 200,
+    "maxCodeLines": 2000,
+    "requireTests": true,
+    "requireDocumentation": true
+  },
+  "taskTemplate": {
+    "id": "string",
+    "title": "string",
+    "description": "string",
+    "type": "backend|frontend|qa|architecture",
+    "assignedTo": "string",
+    "priority": "high|medium|low",
+    "estimatedLines": "number",
+    "dependencies": [],
+    "status": "pending|in-progress|completed|failed",
+    "createdAt": "ISO8601",
+    "completedAt": "ISO8601",
+    "validationCriteria": {
+      "minCodeLines": 200,
+      "testsRequired": true,
+      "apiSpecUpdated": false,
+      "frontendBackendSynced": false
+    }
+  }
+}

@@ -1,0 +1,159 @@
+name: AI Frontend Development
+
+on:
+  issues:
+    types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to work on'
+        required: true
+        type: number
+
+# 允许同类型任务并发执行（最多2个）
+concurrency:
+  group: ai-frontend-dev-type
+  cancel-in-progress: false
+
+jobs:
+  frontend-development:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'frontend') || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python for Gemini Integration
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests PyGithub google-generativeai pillow
+
+      - name: Acquire Concurrency Lock
+        id: acquire_lock
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; import sys; lock = ConcurrencyLock(); sys.exit(0 if lock.acquire('frontend-issue-${ISSUE_NUMBER}', 'frontend-dev', max_wait=600) else 1)"
+
+      - name: Parse Issue Requirements
+        id: parse
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python scripts/frontend/parse_issue.py
+
+      - name: Generate Assets if Needed
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          python scripts/frontend/generate_assets.py
+
+      - name: Generate Frontend Code
+        id: generate_code
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        continue-on-error: true
+        run: |
+          python scripts/frontend/generate_code.py
+
+      - name: Retry on Failure
+        if: steps.generate_code.outcome == 'failure'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          echo "⚠️  首次尝试失败，5秒后重试..."
+          sleep 5
+          python scripts/frontend/generate_code.py
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          if [ -f "package.json" ]; then
+            npm install || echo "Dependencies not yet configured"
+          fi
+
+      - name: Run Linter
+        run: |
+          cd frontend
+          if [ -f "package.json" ]; then
+            npm run lint || echo "Linter not yet configured"
+          fi
+
+      - name: Build Frontend
+        run: |
+          cd frontend
+          if [ -f "package.json" ]; then
+            npm run build || echo "Build not yet configured"
+          fi
+
+      - name: Validate Code Quality
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          python scripts/frontend/validate_quality.py
+
+      - name: Create Pull Request
+        id: create_pr
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          git config --local user.email "3463645195@qq.com"
+          git config --local user.name "Anyeling0620"
+          
+          BRANCH_NAME="feature/frontend-issue-$ISSUE_NUMBER"
+          git checkout -b $BRANCH_NAME
+          git add .
+          git commit -m "[frontend-dev] Implement issue #$ISSUE_NUMBER"
+          git push origin $BRANCH_NAME
+          
+          python scripts/frontend/create_pr.py
+
+      - name: Send Completion Notification
+        if: success()
+        env:
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python scripts/utils/send_task_complete_notification.py
+
+      - name: Release Lock
+        if: always()
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; ConcurrencyLock().release('frontend-issue-${ISSUE_NUMBER}')"
+
+      - name: Send Failure Notification
+        if: failure()
+        env:
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python scripts/utils/send_task_failed_notification.py

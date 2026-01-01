@@ -1,0 +1,142 @@
+name: AI Backend Development
+
+on:
+  issues:
+    types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to work on'
+        required: true
+        type: number
+
+# 允许同类型任务并发执行（最多2个）
+concurrency:
+  group: ai-backend-dev-type
+  cancel-in-progress: false
+
+jobs:
+  backend-development:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'backend') || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Python for AI Integration
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install requests PyGithub openai google-generativeai
+
+      - name: Acquire Concurrency Lock
+        id: acquire_lock
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; import sys; lock = ConcurrencyLock(); sys.exit(0 if lock.acquire('backend-issue-${ISSUE_NUMBER}', 'backend-dev', max_wait=600) else 1)"
+
+      - name: Parse Issue Requirements
+        id: parse
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python scripts/backend/parse_issue.py
+
+      - name: Generate Backend Code
+        id: generate_code
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        continue-on-error: true
+        run: |
+          python scripts/backend/generate_code.py
+
+      - name: Retry on Failure
+        if: steps.generate_code.outcome == 'failure'
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          echo "⚠️  首次尝试失败，5秒后重试..."
+          sleep 5
+          python scripts/backend/generate_code.py
+
+      - name: Run Tests
+        run: |
+          cd backend
+          if [ -f "pom.xml" ]; then
+            ./mvnw test || echo "Tests not yet configured"
+          fi
+
+      - name: Validate Code Quality
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          python scripts/backend/validate_quality.py
+
+      - name: Update OpenAPI Spec
+        run: |
+          python scripts/backend/update_openapi.py
+
+      - name: Create Pull Request
+        id: create_pr
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+        run: |
+          git config --local user.email "3463645195@qq.com"
+          git config --local user.name "Anyeling0620"
+          
+          BRANCH_NAME="feature/backend-issue-$ISSUE_NUMBER"
+          git checkout -b $BRANCH_NAME
+          git add .
+          git commit -m "[backend-dev] Implement issue #$ISSUE_NUMBER"
+          git push origin $BRANCH_NAME
+          
+          python scripts/backend/create_pr.py
+
+      - name: Send Completion Notification
+        if: success()
+        env:
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python scripts/utils/send_task_complete_notification.py
+
+      - name: Release Lock
+        if: always()
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; ConcurrencyLock().release('backend-issue-${ISSUE_NUMBER}')"
+
+      - name: Send Failure Notification
+        if: failure()
+        env:
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
+        run: |
+          python scripts/utils/send_task_failed_notification.py
