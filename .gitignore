@@ -1,0 +1,24 @@
+# Java
+target/
+*.class
+*.jar
+.mvn/
+
+# Node
+node_modules/
+dist/
+build/
+.eslintcache
+
+# Logs & DB
+*.log
+infra/database/temp_data/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
