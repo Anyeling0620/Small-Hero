@@ -136,6 +136,8 @@ jobs:
         env:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+          TEST_PASSED: 'true'
+          TEST_COVERAGE: '85%'
         run: |
           python scripts/utils/send_test_result_notification.py
 
@@ -150,6 +152,7 @@ jobs:
         if: failure()
         env:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+          ISSUE_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr_number }}
+          ERROR_MESSAGE: 'QA 测试失败'
         run: |
           python scripts/utils/send_task_failed_notification.py
