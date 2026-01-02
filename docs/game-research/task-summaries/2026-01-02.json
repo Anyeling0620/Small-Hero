@@ -1,6 +1,6 @@
 {
   "date": "2026-01-02",
-  "pending_tasks": 5,
+  "pending_tasks": 10,
   "in_progress_tasks": 0,
   "completed_tasks": 0,
   "tasks": [
@@ -99,6 +99,107 @@
       ],
       "status": "pending",
       "createdAt": "2026-01-02T02:58:53.074572",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 250,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-006",
+      "title": "实现怪物基础属性数据模型",
+      "description": "设计并实现怪物基础属性数据模型，包括攻击力、防御力、生命值、经验值、掉落物品ID等。数据结构需要考虑不同类型怪物的属性差异。需要同步更新 OpenAPI 规范文档。验收标准：数据模型定义清晰，包含所有必要属性，可扩展性强，单元测试覆盖所有属性，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 350,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-02T05:23:54.526180",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 350,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-007",
+      "title": "实现基础技能数据模型",
+      "description": "设计并实现基础技能数据模型，包括技能ID、技能名称、技能描述、技能类型（主动/被动）、技能效果、消耗资源、冷却时间等。需要考虑不同技能类型的差异。需要同步更新 OpenAPI 规范文档。验收标准：数据模型定义清晰，包含所有必要属性，可扩展性强，单元测试覆盖所有属性，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-02T05:23:54.526190",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-008",
+      "title": "实现怪物AI基础逻辑",
+      "description": "实现怪物AI的基础逻辑，包括攻击目标选择、技能释放、移动策略等。怪物AI需要根据当前战斗状态和目标属性做出决策。验收标准：怪物AI能够选择攻击目标，释放技能，并进行简单的移动，行为符合预期，单元测试覆盖核心AI逻辑。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260103-002",
+        "20260103-006",
+        "20260103-007"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-02T05:23:54.526192",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-009",
+      "title": "创建怪物血条UI组件",
+      "description": "创建怪物血条UI组件，用于显示怪物的生命值。需要设计UI布局，实现血条的动态更新，并使用合适的素材资源，例如：暗黑风格的血条纹理。验收标准：UI布局清晰，血条能够根据生命值变化动态更新，素材资源符合游戏风格，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 350,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-02T05:23:54.526193",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 350,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
+    },
+    {
+      "id": "20260103-010",
+      "title": "编写怪物基础属性单元测试",
+      "description": "为怪物基础属性编写单元测试，覆盖所有属性计算的场景，确保计算结果的正确性。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 250,
+      "dependencies": [
+        "20260103-006"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-02T05:23:54.526194",
       "completedAt": null,
       "validationCriteria": {
         "minCodeLines": 250,
