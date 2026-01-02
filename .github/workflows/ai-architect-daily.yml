@@ -2,10 +2,8 @@ name: AI Architect Daily Task Generation
 
 on:
   schedule:
-    # 每天多次运行：9:00, 13:00, 17:00, 21:00 UTC+8
+    # 每天2次运行：9:00, 21:00 UTC+8（降低频率）
     - cron: '0 1 * * *'    # 09:00 UTC+8
-    - cron: '0 5 * * *'    # 13:00 UTC+8
-    - cron: '0 9 * * *'    # 17:00 UTC+8
     - cron: '0 13 * * *'   # 21:00 UTC+8
   workflow_dispatch: # 允许手动触发
 
@@ -98,6 +96,7 @@ jobs:
         if: always()
         env:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           python scripts/utils/send_daily_report.py
 

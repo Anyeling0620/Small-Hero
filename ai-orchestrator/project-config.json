@@ -223,27 +223,29 @@
   },
   "concurrencyControl": {
     "enabled": true,
-    "maxConcurrentTasks": 3,
+    "maxConcurrentTasks": 1,
     "maxConcurrentPerType": {
+      "backend": 1,
+      "frontend": 1,
+      "qa": 1
+    },
+    "lockTimeout": 3600000,
+    "lockFile": ".github/.task-lock.json",
+    "description": "降低并发数，使用 issue 级别锁避免重复执行"
+  },
+  "taskGeneration": {
+    "dailyTaskCount": {
+      "min": 3,
+      "max": 6,
       "backend": 2,
       "frontend": 2,
       "qa": 1
     },
-    "lockTimeout": 3600000,
-    "lockFile": ".github/.task-lock.json"
-  },
-  "taskGeneration": {
-    "dailyTaskCount": {
-      "min": 5,
-      "max": 10,
-      "backend": 3,
-      "frontend": 3,
-      "qa": 2
-    },
     "executionSchedule": {
-      "times": ["09:00", "13:00", "17:00", "21:00"],
+      "times": ["09:00", "21:00"],
       "timezone": "UTC+8",
-      "enabled": true
+      "enabled": true,
+      "description": "每天执行2次，降低频率避免触发过多任务"
     },
     "priorityDistribution": {
       "high": 0.4,
