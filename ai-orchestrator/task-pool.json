@@ -203,6 +203,86 @@
         "apiSpecUpdated": false,
         "frontendBackendSynced": false
       }
+    },
+    {
+      "id": "20260103-011",
+      "title": "实现装备基础数据模型",
+      "description": "设计并实现装备基础数据模型，包括装备ID、装备名称、装备类型、装备品质、基础属性加成、特殊效果ID等。需要考虑不同类型装备的属性差异，例如武器、防具、饰品等。需要同步更新 OpenAPI 规范文档。验收标准：数据模型定义清晰，包含所有必要属性，可扩展性强，单元测试覆盖所有属性，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 450,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-02T13:32:19.842026",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 450,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-012",
+      "title": "创建英雄选择界面UI",
+      "description": "创建英雄选择界面UI，用于展示可选择的英雄列表，并允许玩家选择英雄。需要设计UI布局，包括英雄头像、英雄名称、英雄属性等信息。素材需要手绘风格，体现英雄职业特色。验收标准：UI布局美观，英雄信息显示清晰，英雄选择功能正常，素材资源符合游戏风格，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-02T13:32:19.842034",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
+    },
+    {
+      "id": "20260103-013",
+      "title": "实现装备属性计算单元测试",
+      "description": "为装备基础数据模型中的属性计算逻辑编写单元测试，覆盖所有属性计算的场景，确保计算结果的正确性。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 300,
+      "dependencies": [
+        "20260103-011"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-02T13:32:19.842035",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 300,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-014",
+      "title": "实现基础属性计算公式",
+      "description": "实现角色属性（如攻击力，防御力，生命值）基于基础属性（力量，敏捷，智力）的计算公式。公式需考虑游戏平衡性。验收标准：属性计算结果符合预期，单元测试覆盖所有属性组合，不同属性组合计算结果合理。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [
+        "20260103-001"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-02T13:32:19.842037",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
     }
   ],
   "completedTasks": [],
