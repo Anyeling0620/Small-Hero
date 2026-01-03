@@ -390,6 +390,109 @@
         "apiSpecUpdated": false,
         "frontendBackendSynced": false
       }
+    },
+    {
+      "id": "20260103-020",
+      "title": "实现金币获取与消耗逻辑",
+      "description": "实现金币的获取与消耗逻辑。包括击杀怪物掉落金币、完成任务奖励金币、购买物品消耗金币等。需要定义金币的存储方式，以及金币变动的记录方式。需要同步更新 OpenAPI 规范文档。验收标准：金币获取与消耗逻辑正确，金币变动记录清晰，单元测试覆盖所有金币变动场景，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 500,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-03T13:28:09.017733",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 500,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-021",
+      "title": "创建金币显示UI组件",
+      "description": "创建金币显示UI组件，用于显示玩家当前拥有的金币数量。需要设计UI布局，包括金币图标和金币数量。需要使用具有光泽感的金币图标，体现金币的价值。验收标准：UI布局美观，金币数量显示清晰，金币图标符合游戏风格，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 350,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-03T13:28:09.017744",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 350,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
+    },
+    {
+      "id": "20260103-022",
+      "title": "实现技能冷却时间UI显示",
+      "description": "实现技能冷却时间UI显示，当技能进入冷却时，在技能图标上显示冷却时间倒计时，并遮罩技能图标。需要设计冷却时间倒计时的显示样式，以及遮罩效果。冷却完毕后，技能图标恢复正常显示。验收标准：冷却时间倒计时显示清晰，遮罩效果美观，冷却完毕后技能图标恢复正常，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [
+        "20260103-018"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-03T13:28:09.017746",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
+    },
+    {
+      "id": "20260103-023",
+      "title": "编写金币获取与消耗单元测试",
+      "description": "为金币获取与消耗逻辑编写单元测试，覆盖所有金币获取和消耗的场景，确保计算结果的正确性。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 300,
+      "dependencies": [
+        "20260103-020"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-03T13:28:09.017747",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 300,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260103-024",
+      "title": "实现装备掉落逻辑",
+      "description": "实现击杀怪物后装备掉落的逻辑。包括掉落概率的计算、掉落装备的随机选择、以及将掉落装备添加到玩家背包中。掉落概率和装备品质需要根据怪物类型和关卡难度进行调整。需要同步更新 OpenAPI 规范文档。验收标准：装备掉落逻辑正确，掉落概率符合预期，掉落装备添加到玩家背包中，单元测试覆盖所有掉落场景，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260103-006",
+        "20260103-011",
+        "20260103-020"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-03T13:28:09.017748",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
     }
   ],
   "completedTasks": [],
