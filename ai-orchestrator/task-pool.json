@@ -604,6 +604,107 @@
         "apiSpecUpdated": false,
         "frontendBackendSynced": true
       }
+    },
+    {
+      "id": "20260104-006",
+      "title": "实现关卡数据模型",
+      "description": "设计并实现关卡数据模型，包括关卡ID、关卡名称、怪物配置、背景音乐、掉落物品配置等。需要考虑不同关卡的难度和奖励差异。需要同步更新 OpenAPI 规范文档。验收标准：数据模型定义清晰，包含所有必要属性，可扩展性强，单元测试覆盖所有属性，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 450,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-04T13:28:56.035719",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 450,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260104-007",
+      "title": "创建关卡选择UI界面",
+      "description": "创建关卡选择UI界面，用于展示可选择的关卡列表，并允许玩家选择关卡。需要设计UI布局，包括关卡图标、关卡名称、关卡难度等信息。素材需要具有冒险风格，体现关卡特色。验收标准：UI布局美观，关卡信息显示清晰，关卡选择功能正常，素材资源符合游戏风格，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 500,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-04T13:28:56.035730",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 500,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
+    },
+    {
+      "id": "20260104-008",
+      "title": "实现关卡数据模型单元测试",
+      "description": "为关卡数据模型编写单元测试，覆盖所有关卡属性的场景，确保数据结构的正确性和完整性。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 350,
+      "dependencies": [
+        "20260104-006"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-04T13:28:56.035731",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 350,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260104-009",
+      "title": "实现简单的挂机战斗循环",
+      "description": "基于之前的战斗系统框架，实现一个简单的挂机战斗循环。英雄自动攻击怪物，怪物受到伤害后反击，直到一方死亡。需要记录战斗过程中的伤害数值和事件。验收标准：英雄和怪物能够自动进行攻击和反击，战斗过程可以正确记录，单元测试覆盖基本战斗场景。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260103-003",
+        "20260104-001",
+        "20260103-008"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-04T13:28:56.035733",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260104-010",
+      "title": "创建伤害数值显示UI组件",
+      "description": "创建伤害数值显示UI组件，用于在战斗中显示伤害数值。数值飘字效果需要具有打击感和清晰可见性。需要设计UI布局，包括伤害数值的颜色、大小、字体和动画效果。素材需要具有数字显示风格，可参考暗黑破坏神的伤害数值样式。验收标准：UI布局清晰，伤害数值显示明显，动画效果流畅，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 450,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-04T13:28:56.035734",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 450,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
     }
   ],
   "completedTasks": [],
