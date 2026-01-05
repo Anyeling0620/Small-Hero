@@ -1,6 +1,6 @@
 {
   "date": "2026-01-05",
-  "pending_tasks": 38,
+  "pending_tasks": 42,
   "in_progress_tasks": 0,
   "completed_tasks": 0,
   "tasks": [
@@ -786,6 +786,99 @@
       ],
       "status": "pending",
       "createdAt": "2026-01-05T03:11:19.130975",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 450,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260105-005",
+      "title": "实现战斗结算界面与奖励展示",
+      "description": "实现战斗结算界面，在战斗结束后展示战斗结果，包括经验值获取、金币获取、装备掉落等。界面需要显示战斗胜负情况，奖励物品的图标和数量，以及经验值和金币的变动情况。需要能够返回关卡选择界面。素材需使用具有史诗感的背景和图标。验收标准：结算界面布局清晰美观，战斗结果和奖励信息显示完整，奖励展示效果良好，用户体验流畅。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 550,
+      "dependencies": [
+        "20260104-010",
+        "20260105-002",
+        "20260103-021",
+        "20260104-007"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-05T13:39:59.551399",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 550,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
+    },
+    {
+      "id": "20260105-006",
+      "title": "集成关卡、怪物和战斗循环",
+      "description": "将关卡数据模型、怪物生成逻辑和简单的挂机战斗循环集成，实现一个简单的关卡战斗流程。玩家选择关卡后，系统生成怪物，英雄和怪物进行挂机战斗，直到一方死亡。需要记录战斗过程中的伤害数值和事件，并在战斗结束后展示战斗结果。需要同步更新 OpenAPI 规范文档。验收标准：能够选择关卡并进入战斗，怪物生成数量和类型符合关卡配置，战斗过程可以正确记录，战斗结算能够展示战斗结果。单元测试覆盖关卡选择、怪物生成和战斗流程。OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 750,
+      "dependencies": [
+        "20260104-006",
+        "20260105-004",
+        "20260104-009",
+        "20260105-001",
+        "20260103-024",
+        "20260103-020"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-05T13:39:59.551410",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 750,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260105-007",
+      "title": "实现基础商店数据模型与商品刷新",
+      "description": "设计并实现基础商店数据模型，包括商店ID、商品列表、刷新规则等。实现商品刷新逻辑，包括定时刷新、货币刷新等。商品列表包括装备、道具等。需要同步更新 OpenAPI 规范文档。验收标准：数据模型定义清晰，包含所有必要属性，可扩展性强。商品刷新逻辑正确，刷新规则符合预期，刷新的商品种类和数量符合设定。单元测试覆盖商店数据模型、商品刷新逻辑和购买逻辑。OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260103-011",
+        "20260103-020"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-05T13:39:59.551411",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260105-008",
+      "title": "编写关卡集成与战斗流程单元测试",
+      "description": "为集成的关卡、怪物生成和战斗循环流程编写单元测试，覆盖关卡选择、怪物生成、英雄攻击、怪物反击、伤害计算和战斗结算等场景。 验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过。测试需要验证战斗流程的正确性，以及数据的正确性（如：经验、金币、掉落）",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 450,
+      "dependencies": [
+        "20260105-006"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-05T13:39:59.551413",
       "completedAt": null,
       "validationCriteria": {
         "minCodeLines": 450,
