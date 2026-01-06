@@ -983,6 +983,112 @@
         "apiSpecUpdated": false,
         "frontendBackendSynced": true
       }
+    },
+    {
+      "id": "20260106-006",
+      "title": "实现装备套装属性激活与加成逻辑",
+      "description": "实现装备套装属性激活与加成逻辑。当英雄穿戴满足条件的套装装备时，激活对应的套装属性，并根据套装效果，更新英雄的属性值。需要考虑套装装备数量和品质对属性加成的影响。验收标准：装备穿戴后，套装属性正确激活，英雄属性值正确更新，符合套装属性加成规则，单元测试覆盖套装穿戴、卸载以及不同套装激活场景。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 650,
+      "dependencies": [
+        "20260103-015",
+        "20260106-004"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-06T13:37:02.764735",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 650,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260106-007",
+      "title": "实现英雄转职系统",
+      "description": "实现英雄转职系统。英雄达到特定等级和满足特定条件后，可以进行转职，转职后英雄的属性和技能会发生改变。需要定义转职条件、转职后的属性加成和技能变化。需要同步更新 OpenAPI 规范文档。验收标准：英雄能够成功转职，转职后的属性和技能符合设定，转职逻辑严谨，单元测试覆盖所有转职场景，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 700,
+      "dependencies": [
+        "20260105-001"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-06T13:37:02.764745",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 700,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260106-008",
+      "title": "创建商店UI界面与商品展示",
+      "description": "创建商店UI界面，用于展示商店中的商品列表，并允许玩家购买商品。需要设计UI布局，包括商品图标、商品名称、商品价格等信息。需要支持商品分类显示。 素材需使用高质量贴图，并使用特效增强视觉效果，例如：商品光晕效果，翻页动画。验收标准：UI布局美观，商品信息显示清晰，商品购买功能正常，素材资源符合游戏风格，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 550,
+      "dependencies": [],
+      "status": "pending",
+      "createdAt": "2026-01-06T13:37:02.764747",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 550,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      }
+    },
+    {
+      "id": "20260106-009",
+      "title": "实现商店商品购买逻辑",
+      "description": "实现商店商品的购买逻辑。玩家可以使用金币或以太购买商店中的商品。购买商品后，需要扣除相应的货币，并将商品添加到玩家的背包中。需要考虑商品数量和货币不足的情况。需要同步更新 OpenAPI 规范文档。验收标准：商品购买逻辑正确，货币扣除正确，商品添加到玩家背包中，单元测试覆盖所有购买场景，包括货币不足和背包已满等情况，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260105-007",
+        "20260103-020",
+        "20260106-001"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-06T13:37:02.764748",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      }
+    },
+    {
+      "id": "20260106-010",
+      "title": "为装备套装属性激活与加成编写单元测试",
+      "description": "为装备套装属性激活与加成逻辑编写单元测试，覆盖所有套装装备类型、激活条件和属性加成场景，确保计算结果的正确性。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过，包括不同套装数量和套装类型组合情况。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [
+        "20260106-006"
+      ],
+      "status": "pending",
+      "createdAt": "2026-01-06T13:37:02.764749",
+      "completedAt": null,
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      }
     }
   ],
   "completedTasks": [],
