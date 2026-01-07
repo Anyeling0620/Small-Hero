@@ -76,7 +76,7 @@ jobs:
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         run: |
-          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; import sys; lock = ConcurrencyLock(); sys.exit(0 if lock.acquire('frontend-issue-${ISSUE_NUMBER}', 'frontend-dev', max_wait=600) else 1)"
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; import sys; lock = ConcurrencyLock(); sys.exit(0 if lock.acquire('frontend-issue-${{ github.event.issue.number || github.event.inputs.issue_number }}', 'frontend-dev', max_wait=600) else 1)"
 
       - name: Parse Issue Requirements
         id: parse
@@ -84,15 +84,16 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         run: |
-          python scripts/frontend/parse_issue.py 2>&1 | tee -a $LOG_FILE
+          python scripts/frontend/parse_issue.py 2>&1 | tee -a "$LOG_FILE"
 
       - name: Generate Assets if Needed
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         run: |
-          python scripts/frontend/generate_assets.py 2>&1 | tee -a $LOG_FILE
+          python scripts/frontend/generate_assets.py 2>&1 | tee -a "$LOG_FILE"
 
       - name: Generate Frontend Code
         id: generate_code
@@ -103,7 +104,7 @@ jobs:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
         continue-on-error: true
         run: |
-          python scripts/frontend/generate_code.py 2>&1 | tee -a $LOG_FILE
+          python scripts/frontend/generate_code.py 2>&1 | tee -a "$LOG_FILE"
 
       - name: Retry on Failure
         if: steps.generate_code.outcome == 'failure'
@@ -113,9 +114,9 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
         run: |
-          echo "⚠️  首次尝试失败，5秒后重试..." 2>&1 | tee -a $LOG_FILE
+          echo "⚠️  首次尝试失败，5秒后重试..." 2>&1 | tee -a "$LOG_FILE"
           sleep 5
-          python scripts/frontend/generate_code.py 2>&1 | tee -a $LOG_FILE
+          python scripts/frontend/generate_code.py 2>&1 | tee -a "$LOG_FILE"
 
       - name: Install Frontend Dependencies
         run: |
@@ -141,6 +142,7 @@ jobs:
       - name: Validate Code Quality
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         run: |
           python scripts/frontend/validate_quality.py
 
@@ -152,17 +154,17 @@ jobs:
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
         run: |
           set -e
-          exec > >(tee -a $LOG_FILE) 2>&1
+          exec > >(tee -a "$LOG_FILE") 2>&1
           git config --local user.email "3463645195@qq.com"
           git config --local user.name "Anyeling0620"
 
-          BRANCH_NAME="feature/frontend-issue-$ISSUE_NUMBER"
+          BRANCH_NAME="feature/frontend-issue-${{ github.event.issue.number || github.event.inputs.issue_number }}"
           git checkout -b $BRANCH_NAME
           git add .
-          git commit -m "[frontend-dev] Implement issue #$ISSUE_NUMBER" || true
+          git commit -m "[frontend-dev] Implement issue #${{ github.event.issue.number || github.event.inputs.issue_number }}" || true
           git push origin $BRANCH_NAME || true
 
-          python scripts/frontend/create_pr.py 2>&1 | tee -a $LOG_FILE
+          python scripts/frontend/create_pr.py 2>&1 | tee -a "$LOG_FILE"
 
       - name: Send Completion Notification
         if: success()
@@ -177,7 +179,7 @@ jobs:
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         run: |
-          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; ConcurrencyLock().release('frontend-issue-${ISSUE_NUMBER}')"
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; ConcurrencyLock().release('frontend-issue-${{ github.event.issue.number || github.event.inputs.issue_number }}')"
 
       - name: Upload workflow log
         if: always()

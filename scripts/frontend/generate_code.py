@@ -5,7 +5,11 @@
 import os
 import sys
 import json
-from scripts.utils.ai_helper import AIHelper
+
+# 添加项目根目录到 Python 路径
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
+from scripts.utils.ai_helper import AIModelHelper
 
 def generate_frontend_code():
     """生成前端代码"""
@@ -64,7 +68,8 @@ def generate_frontend_code():
 """
         
         # 使用 AI 生成代码
-        ai_helper = AIHelper(role='frontendDev')
+        from scripts.utils.ai_helper import create_ai_helper
+        ai_helper = create_ai_helper('frontendDev')
         response = ai_helper.generate_content(prompt)
         
         if not response:

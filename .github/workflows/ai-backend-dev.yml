@@ -69,7 +69,7 @@ jobs:
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         run: |
-          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; import sys; lock = ConcurrencyLock(); sys.exit(0 if lock.acquire('backend-issue-${ISSUE_NUMBER}', 'backend-dev', max_wait=600) else 1)"
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; import sys; lock = ConcurrencyLock(); sys.exit(0 if lock.acquire('backend-issue-${{ github.event.issue.number || github.event.inputs.issue_number }}', 'backend-dev', max_wait=600) else 1)"
 
       - name: Parse Issue Requirements
         id: parse
@@ -83,6 +83,7 @@ jobs:
         id: generate_code
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
@@ -94,11 +95,14 @@ jobs:
         if: steps.generate_code.outcome == 'failure'
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
           PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
         run: |
           echo "⚠️  首次尝试失败，5秒后重试..."
+          sleep 5
+          python scripts/backend/generate_code.py
           sleep 5
           python scripts/backend/generate_code.py
 
@@ -150,7 +154,7 @@ jobs:
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
         run: |
-          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; ConcurrencyLock().release('backend-issue-${ISSUE_NUMBER}')"
+          python -c "from scripts.utils.concurrency_lock import ConcurrencyLock; ConcurrencyLock().release('backend-issue-${{ github.event.issue.number || github.event.inputs.issue_number }}')"
 
       - name: Send Failure Notification
         if: failure()
