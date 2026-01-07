@@ -1,0 +1,12 @@
+{
+  "issue_number": "1",
+  "title": "[BACKEND] 实现基础属性数据模型",
+  "body": "\n## 任务描述\n设计并实现基础属性数据模型，包括力量、敏捷、智力等一级属性，以及攻击力、防御力、生命值等二级属性。需要定义数据结构，以及属性计算的公式。需要同步更新 OpenAPI 规范文档。验收标准：数据模型定义清晰，属性计算公式正确，单元测试覆盖所有属性计算逻辑，OpenAPI文档同步更新。\n\n## 任务信息\n- **类型**: backend\n- **分配给**: backend-dev\n- **优先级**: high\n- **预计代码行数**: 300\n- **创建时间**: 2026-01-02T02:58:53.074558\n\n## 验收标准\n- [x] minCodeLines: 300\n- [ ] testsRequired: True\n- [ ] apiSpecUpdated: True\n- [ ] frontendBackendSynced: False\n\n\n---\n**任务 ID**: `20260103-001`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "backend",
+    "high",
+    "ai-generated",
+    "in-progress"
+  ],
+  "created_at": "2026-01-02 02:58:56+00:00"
+}
