@@ -1193,6 +1193,102 @@
         "apiSpecUpdated": true,
         "frontendBackendSynced": false
       }
+    },
+    {
+      "id": "20260107-006",
+      "title": "实现雕像激活与属性加成逻辑",
+      "description": "实现雕像激活与属性加成逻辑。玩家可以使用金币或以太激活雕像。激活成功后，根据雕像的效果，更新英雄的属性值。需要考虑货币不足的情况。激活的雕像效果需要持久生效，直到玩家主动重置或满足特定条件失效。需要同步更新 OpenAPI 规范文档。验收标准：雕像激活逻辑正确，货币扣除正确，英雄属性值正确更新，单元测试覆盖所有激活场景，包括货币不足等情况，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 650,
+      "dependencies": [
+        "20260103-020",
+        "20260106-001",
+        "20260107-005"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 650,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-07T13:38:50.236382"
+    },
+    {
+      "id": "20260107-007",
+      "title": "创建雕像展示UI界面",
+      "description": "创建雕像展示UI界面，用于展示可激活的雕像列表，并允许玩家进行激活。需要设计UI布局，包括雕像图标、雕像名称、雕像效果描述、激活所需货币等信息。激活成功后，雕像图标需要改变状态，例如发光或高亮显示。素材需使用具有神秘感和力量感的贴图，并使用特效增强视觉效果。验收标准：UI布局美观，雕像信息显示清晰，激活功能正常，特效炫酷，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 550,
+      "dependencies": [],
+      "validationCriteria": {
+        "minCodeLines": 550,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-07T13:38:50.236393"
+    },
+    {
+      "id": "20260107-008",
+      "title": "实现雕像效果激活单元测试",
+      "description": "为雕像激活与属性加成逻辑编写单元测试，覆盖所有激活场景，包括金币激活、以太激活、货币不足等情况，以及各种雕像属性加成效果。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过，需要覆盖边界条件和异常情况。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [
+        "20260107-006"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-07T13:38:50.236394"
+    },
+    {
+      "id": "20260107-009",
+      "title": "实现简单的成就系统",
+      "description": "实现一个简单的成就系统，包括成就数据模型和成就解锁逻辑。成就数据模型需要包括成就ID、成就名称、成就描述、达成条件、奖励内容等字段。成就解锁逻辑需要根据玩家的游戏行为，判断是否满足成就的达成条件，如果满足则解锁成就，并给予奖励。奖励内容包括金币、以太、装备等。需要同步更新 OpenAPI 规范文档。验收标准：成就数据模型定义清晰完整，成就解锁逻辑正确，奖励发放正确，单元测试覆盖所有成就场景，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 700,
+      "dependencies": [],
+      "validationCriteria": {
+        "minCodeLines": 700,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-07T13:38:50.236398"
+    },
+    {
+      "id": "20260107-010",
+      "title": "创建成就展示UI界面",
+      "description": "创建成就展示UI界面，用于显示玩家已解锁和未解锁的成就列表。需要设计UI布局，包括成就图标、成就名称、成就描述、达成进度等信息。未解锁的成就需要灰色显示，已解锁的成就需要高亮显示，并显示领取奖励的按钮。素材需使用高质量贴图，并使用特效增强视觉效果，例如：成就解锁时的闪光特效。验收标准：UI布局美观，成就信息显示清晰，奖励领取功能正常，解锁状态显示正确，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 500,
+      "dependencies": [],
+      "validationCriteria": {
+        "minCodeLines": 500,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-07T13:38:50.236399"
     }
   ],
   "completedTasks": [],
