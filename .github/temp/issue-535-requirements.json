@@ -1,0 +1,12 @@
+{
+  "issue_number": "535",
+  "title": "[FRONTEND] 创建伤害数值显示UI组件",
+  "body": "\n## 任务描述\n创建伤害数值显示UI组件，用于在战斗中显示伤害数值。数值飘字效果需要具有打击感和清晰可见性。需要设计UI布局，包括伤害数值的颜色、大小、字体和动画效果。素材需要具有数字显示风格，可参考暗黑破坏神的伤害数值样式。验收标准：UI布局清晰，伤害数值显示明显，动画效果流畅，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 450\n- **创建时间**: 2026-01-04T13:28:56.035734\n\n## 验收标准\n- [ ] minCodeLines: 450\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n\n---\n**任务 ID**: `20260104-010`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-08 13:40:43+00:00"
+}
