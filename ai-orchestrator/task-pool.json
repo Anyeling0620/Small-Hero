@@ -1392,6 +1392,110 @@
       },
       "status": "pending",
       "createdAt": "2026-01-08T02:57:56.100813"
+    },
+    {
+      "id": "20260108-006",
+      "title": "实现成就解锁与奖励发放",
+      "description": "实现成就解锁与奖励发放的具体逻辑。根据玩家的游戏行为，判断是否满足成就的达成条件。如果满足，则解锁成就，并在成就展示UI界面中更新成就状态，同时发放奖励（金币、以太、装备等）。奖励发放需要根据成就数据模型中的奖励配置进行。需要同步更新 OpenAPI 规范文档。验收标准：成就解锁逻辑正确，奖励发放正确，成就状态更新正确，单元测试覆盖所有成就场景，包括达成条件判断、奖励发放和状态更新等，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 750,
+      "dependencies": [
+        "20260107-009"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 750,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-08T13:39:55.028211"
+    },
+    {
+      "id": "20260108-007",
+      "title": "实现装备强化系统",
+      "description": "实现装备强化系统。玩家可以使用金币或以太对装备进行强化，强化后装备的属性值会提升。需要定义装备强化等级、强化所需货币、强化成功率、属性提升系数等。需要同步更新 OpenAPI 规范文档。验收标准：装备强化逻辑正确，货币扣除正确，装备属性提升正确，单元测试覆盖所有强化场景，包括强化成功和失败等情况，需要有详细的成功率测试，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 650,
+      "dependencies": [
+        "20260103-011",
+        "20260103-020",
+        "20260106-001"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 650,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-08T13:39:55.028222"
+    },
+    {
+      "id": "20260108-008",
+      "title": "创建装备强化UI界面与动画特效",
+      "description": "创建装备强化UI界面，用于显示装备的强化信息，并允许玩家进行强化。需要设计UI布局，包括装备图标、装备名称、装备等级、强化所需货币等信息。强化成功或失败时，需要播放相应的动画特效，例如强化成功时的光芒四射，强化失败时的灰暗效果。素材需使用高质量贴图，并使用粒子特效增强视觉效果。验收标准：UI布局美观，装备信息显示清晰，强化功能正常，动画特效炫酷，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 550,
+      "dependencies": [
+        "20260103-016"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 550,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-08T13:39:55.028223"
+    },
+    {
+      "id": "20260108-009",
+      "title": "编写装备强化系统单元测试",
+      "description": "为装备强化系统编写单元测试，覆盖所有强化场景，包括金币强化、以太强化、强化成功、强化失败、强化等级上限等情况。测试用例需要覆盖边界条件和异常情况。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过，需要覆盖强化成功率的测试。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [
+        "20260108-007"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-08T13:39:55.028224"
+    },
+    {
+      "id": "20260108-010",
+      "title": "实现基础技能升级逻辑",
+      "description": "实现英雄基础技能升级逻辑。英雄可以使用金币或以太对技能进行升级，升级后技能的效果会提升。需要定义技能等级、升级所需货币、技能效果提升系数等。需要同步更新 OpenAPI 规范文档。验收标准：技能升级逻辑正确，货币扣除正确，技能效果提升正确，单元测试覆盖所有技能升级场景，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260103-007",
+        "20260103-020",
+        "20260106-001"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-08T13:39:55.028225"
     }
   ],
   "completedTasks": [],
