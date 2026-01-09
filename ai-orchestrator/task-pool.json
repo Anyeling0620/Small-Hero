@@ -1598,6 +1598,110 @@
       },
       "status": "pending",
       "createdAt": "2026-01-09T02:58:47.070528"
+    },
+    {
+      "id": "20260109-006",
+      "title": "实现技能伤害计算与技能等级关联",
+      "description": "将英雄技能升级逻辑与技能伤害计算逻辑集成。技能升级后，技能的伤害值需要根据技能等级和技能效果提升系数进行计算，并在战斗中生效。伤害计算公式需要考虑技能类型和目标属性的影响。需要同步更新 OpenAPI 规范文档。验收标准：技能伤害计算能够正确使用技能等级和技能效果提升系数，伤害计算结果符合预期。单元测试覆盖所有技能升级和战斗场景。OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 700,
+      "dependencies": [
+        "20260103-007",
+        "20260103-002",
+        "20260109-003"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 700,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-09T13:37:15.389338"
+    },
+    {
+      "id": "20260109-007",
+      "title": "创建技能升级UI界面与特效",
+      "description": "创建技能升级UI界面，用于显示技能的升级信息，并允许玩家进行升级。需要设计UI布局，包括技能图标、技能名称、技能等级、升级所需货币等信息。技能升级成功时，需要播放相应的动画特效，例如等级提升的光芒，技能效果增强的粒子效果。素材需使用高质量贴图，并使用粒子特效增强视觉效果。需要与技能图标UI资源（20260103-018）统一风格。验收标准：UI布局美观，技能信息显示清晰，升级功能正常，动画特效炫酷，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 550,
+      "dependencies": [
+        "20260103-018",
+        "20260106-002"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 550,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-09T13:37:15.389350"
+    },
+    {
+      "id": "20260109-008",
+      "title": "为技能升级和伤害计算集成编写单元测试",
+      "description": "为技能升级和技能伤害计算的集成编写单元测试，覆盖所有技能升级和战斗场景。测试用例需要覆盖技能升级后的伤害值是否正确，以及不同技能等级对伤害的影响。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过。需要包含边界值和异常情况的测试，比如满级技能是否还能升级。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 450,
+      "dependencies": [
+        "20260109-003",
+        "20260109-006"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 450,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-09T13:37:15.389352"
+    },
+    {
+      "id": "20260109-009",
+      "title": "实现英雄数据持久化存储",
+      "description": "实现英雄数据的持久化存储，将英雄的属性、装备、技能、等级、经验等数据存储到数据库中，以便下次启动游戏时能够恢复英雄的状态。需要设计数据库表结构，以及数据的读写逻辑。需要同步更新 OpenAPI 规范文档。验收标准：英雄数据能够正确存储到数据库中，并且能够正确读取和恢复。单元测试覆盖所有数据读写场景。需要保证数据的一致性和完整性。OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260105-001",
+        "20260103-011",
+        "20260103-007"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-09T13:37:15.389353"
+    },
+    {
+      "id": "20260109-010",
+      "title": "创建成就达成提示UI",
+      "description": "创建成就达成提示UI，当玩家达成成就时，在游戏界面上显示成就达成提示信息。提示信息需要包括成就图标、成就名称和成就描述。提示信息需要自动消失，不能影响玩家的游戏体验。素材需使用高质量贴图，并使用动画特效增强视觉效果，例如：成就达成时的闪光特效。验收标准：成就达成提示信息显示清晰，动画特效炫酷，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [],
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-09T13:37:15.389354"
     }
   ],
   "completedTasks": [],
