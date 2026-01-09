@@ -1,0 +1,12 @@
+{
+  "issue_number": "711",
+  "title": "[FRONTEND] 创建套装装备展示UI组件",
+  "body": "\n## 任务描述\n创建套装装备展示UI组件，用于显示英雄当前穿戴的套装装备。需要设计UI布局，包括装备图标、装备名称、装备属性、套装效果描述等信息。需要展示套装激活状态，并根据套装激活数量显示不同的套装效果。素材需要具有金属质感和暗黑风格，并根据套装类型设计不同的视觉风格。验收标准：UI布局美观，装备信息显示清晰，套装效果展示完整，套装激活状态明确，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 500\n- **创建时间**: 2026-01-06T02:57:58.774295\n\n## 验收标准\n- [ ] minCodeLines: 500\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n## 依赖任务\n- 20260103-016\n\n\n---\n**任务 ID**: `20260106-005`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-09 13:38:22+00:00"
+}
