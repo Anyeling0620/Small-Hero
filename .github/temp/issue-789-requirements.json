@@ -1,0 +1,12 @@
+{
+  "issue_number": "789",
+  "title": "[FRONTEND] 实现技能释放UI特效",
+  "body": "\n## 任务描述\n当英雄释放技能时，创建UI特效，例如粒子效果、光效、动画等。特效需要与技能类型相符，并增强技能的视觉冲击力。验收标准：每个技能类型都有对应的特效，特效美观，能够增强技能的视觉冲击力，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 400\n- **创建时间**: 2026-01-04T03:09:16.407852\n\n## 验收标准\n- [ ] minCodeLines: 400\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n## 依赖任务\n- 20260103-022\n\n\n---\n**任务 ID**: `20260104-005`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 02:52:50+00:00"
+}
