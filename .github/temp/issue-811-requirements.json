@@ -1,0 +1,12 @@
+{
+  "issue_number": "811",
+  "title": "[FRONTEND] 创建商店UI界面与商品展示",
+  "body": "\n## 任务描述\n创建商店UI界面，用于展示商店中的商品列表，并允许玩家购买商品。需要设计UI布局，包括商品图标、商品名称、商品价格等信息。需要支持商品分类显示。 素材需使用高质量贴图，并使用特效增强视觉效果，例如：商品光晕效果，翻页动画。验收标准：UI布局美观，商品信息显示清晰，商品购买功能正常，素材资源符合游戏风格，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 550\n- **创建时间**: 2026-01-06T13:37:02.764747\n\n## 验收标准\n- [ ] minCodeLines: 550\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n\n---\n**任务 ID**: `20260106-008`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 02:53:18+00:00"
+}
