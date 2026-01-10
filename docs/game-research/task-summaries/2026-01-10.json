@@ -1,5 +1,9 @@
 {
-  "taskPool": [
+  "date": "2026-01-10",
+  "pending_tasks": 86,
+  "in_progress_tasks": 0,
+  "completed_tasks": 0,
+  "tasks": [
     {
       "id": "20260103-001",
       "title": "实现基础属性数据模型",
@@ -1788,31 +1792,5 @@
       "status": "pending",
       "createdAt": "2026-01-10T02:52:08.667907"
     }
-  ],
-  "completedTasks": [],
-  "taskGenerationRules": {
-    "minCodeLines": 200,
-    "maxCodeLines": 2000,
-    "requireTests": true,
-    "requireDocumentation": true
-  },
-  "taskTemplate": {
-    "id": "string",
-    "title": "string",
-    "description": "string",
-    "type": "backend|frontend|qa|architecture",
-    "assignedTo": "string",
-    "priority": "high|medium|low",
-    "estimatedLines": "number",
-    "dependencies": [],
-    "status": "pending|in-progress|completed|failed",
-    "createdAt": "ISO8601",
-    "completedAt": "ISO8601",
-    "validationCriteria": {
-      "minCodeLines": 200,
-      "testsRequired": true,
-      "apiSpecUpdated": false,
-      "frontendBackendSynced": false
-    }
-  }
+  ]
 }
