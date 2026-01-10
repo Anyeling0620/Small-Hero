@@ -1,0 +1,12 @@
+{
+  "issue_number": "898",
+  "title": "[FRONTEND] 创建经验条UI组件",
+  "body": "\n## 任务描述\n创建经验条UI组件，用于显示英雄当前经验值和升级所需经验。需要设计UI布局，包括经验条的颜色、样式，以及当前经验值和升级所需经验的显示方式。经验条需要能够动态更新。素材需要具有光泽感和升级感。验收标准：UI布局清晰，经验值显示明显，经验条动态更新流畅，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 400\n- **创建时间**: 2026-01-05T03:11:19.130972\n\n## 验收标准\n- [ ] minCodeLines: 400\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n\n---\n**任务 ID**: `20260105-002`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 13:29:05+00:00"
+}
