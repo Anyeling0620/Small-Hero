@@ -1,0 +1,12 @@
+{
+  "issue_number": "874",
+  "title": "[FRONTEND] 创建英雄选择界面UI",
+  "body": "\n## 任务描述\n创建英雄选择界面UI，用于展示可选择的英雄列表，并允许玩家选择英雄。需要设计UI布局，包括英雄头像、英雄名称、英雄属性等信息。素材需要手绘风格，体现英雄职业特色。验收标准：UI布局美观，英雄信息显示清晰，英雄选择功能正常，素材资源符合游戏风格，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 400\n- **创建时间**: 2026-01-02T13:32:19.842034\n\n## 验收标准\n- [ ] minCodeLines: 400\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n\n---\n**任务 ID**: `20260103-012`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 13:28:34+00:00"
+}
