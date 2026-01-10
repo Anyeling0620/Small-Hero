@@ -1,0 +1,12 @@
+{
+  "issue_number": "804",
+  "title": "[FRONTEND] 创建以太货币显示UI组件",
+  "body": "\n## 任务描述\n创建以太货币显示UI组件，用于显示玩家当前拥有的以太数量。需要设计UI布局，包括以太图标和以太数量。需要使用具有神秘感和稀有感的以太图标，体现以太的价值。验收标准：UI布局美观，以太数量显示清晰，以太图标符合游戏风格，用户体验良好，需要设计与金币显示UI不同的风格。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 350\n- **创建时间**: 2026-01-06T02:57:58.774291\n\n## 验收标准\n- [ ] minCodeLines: 350\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n\n---\n**任务 ID**: `20260106-002`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 02:53:10+00:00"
+}
