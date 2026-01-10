@@ -1,0 +1,12 @@
+{
+  "issue_number": "786",
+  "title": "[FRONTEND] 实现背包UI组件与装备展示",
+  "body": "\n## 任务描述\n创建背包UI组件，用于显示玩家拥有的装备列表。背包UI需要支持装备的拖拽，以便进行装备穿戴和卸载。每个装备需要显示图标，名称和基础属性。素材需使用具有暗黑风格和金属质感的装备图标。验收标准：UI布局美观，装备信息显示清晰，装备可拖拽，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 500\n- **创建时间**: 2026-01-04T03:09:16.407849\n\n## 验收标准\n- [ ] minCodeLines: 500\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n## 依赖任务\n- 20260103-016\n- 20260103-011\n\n\n---\n**任务 ID**: `20260104-002`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 02:52:46+00:00"
+}
