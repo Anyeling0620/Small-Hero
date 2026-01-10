@@ -1,0 +1,12 @@
+{
+  "issue_number": "878",
+  "title": "[FRONTEND] 创建装备栏UI组件",
+  "body": "\n## 任务描述\n创建装备栏UI组件，用于显示英雄当前穿戴的装备。需要设计UI布局，包括装备图标、装备名称、装备属性等信息。每个装备栏位需要有拖拽穿戴功能。素材需要具有金属质感和暗黑风格。验收标准：UI布局美观，装备信息显示清晰，装备栏位可拖拽，装备穿戴和卸载功能正常，素材资源符合游戏风格，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 450\n- **创建时间**: 2026-01-03T02:50:20.350899\n\n## 验收标准\n- [ ] minCodeLines: 450\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n## 依赖任务\n- 20260103-004\n\n\n---\n**任务 ID**: `20260103-016`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 13:28:39+00:00"
+}
