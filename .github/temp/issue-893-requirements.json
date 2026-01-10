@@ -1,0 +1,12 @@
+{
+  "issue_number": "893",
+  "title": "[FRONTEND] 创建关卡选择UI界面",
+  "body": "\n## 任务描述\n创建关卡选择UI界面，用于展示可选择的关卡列表，并允许玩家选择关卡。需要设计UI布局，包括关卡图标、关卡名称、关卡难度等信息。素材需要具有冒险风格，体现关卡特色。验收标准：UI布局美观，关卡信息显示清晰，关卡选择功能正常，素材资源符合游戏风格，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 500\n- **创建时间**: 2026-01-04T13:28:56.035730\n\n## 验收标准\n- [ ] minCodeLines: 500\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n\n---\n**任务 ID**: `20260104-007`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 13:28:58+00:00"
+}
