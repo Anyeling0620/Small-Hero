@@ -1,0 +1,12 @@
+{
+  "issue_number": "866",
+  "title": "[FRONTEND] 创建基础属性展示UI组件",
+  "body": "\n## 任务描述\n创建基础属性展示的UI组件，用于显示角色的力量、敏捷、智力等属性值。需要设计UI布局，并使用合适的素材资源。验收标准：UI布局美观，属性值显示清晰，素材资源符合游戏风格，用户体验良好。\n\n## 任务信息\n- **类型**: frontend\n- **分配给**: frontend-dev\n- **优先级**: high\n- **预计代码行数**: 300\n- **创建时间**: 2026-01-02T02:58:53.074571\n\n## 验收标准\n- [ ] minCodeLines: 300\n- [ ] testsRequired: False\n- [ ] apiSpecUpdated: False\n- [ ] frontendBackendSynced: True\n\n## 依赖任务\n- 20260103-001\n\n\n---\n**任务 ID**: `20260103-004`\n**由 AI 架构师自动生成**\n",
+  "labels": [
+    "high",
+    "ai-generated",
+    "frontend",
+    "in-progress"
+  ],
+  "created_at": "2026-01-10 13:28:24+00:00"
+}
