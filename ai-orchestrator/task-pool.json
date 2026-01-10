@@ -1787,6 +1787,106 @@
       },
       "status": "pending",
       "createdAt": "2026-01-10T02:52:08.667907"
+    },
+    {
+      "id": "20260110-005",
+      "title": "实现全局战斗数据统计与展示",
+      "description": "实现全局战斗数据的统计与展示，包括总伤害输出、总承受伤害、暴击次数、闪避次数等。这些数据需要实时更新，并在战斗结束后展示在结算界面上。需要在服务器端进行数据统计，并在前端进行展示。需要同步更新 OpenAPI 规范文档。验收标准：战斗数据统计准确，展示界面美观，单元测试覆盖所有数据统计场景，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 700,
+      "dependencies": [
+        "20260110-001"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 700,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-10T13:28:16.860084"
+    },
+    {
+      "id": "20260110-006",
+      "title": "实现技能升级UI动画特效",
+      "description": "实现技能升级UI的动画特效，当技能升级成功时，需要播放特效，例如等级提升的光芒、技能效果增强的粒子效果，并显示技能效果变化的数值，例如：技能伤害提升了10%。需要制作新的贴图资源，优化动画效果。验收标准：特效动画炫酷，技能效果数值变化显示清晰，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 450,
+      "dependencies": [
+        "20260109-007"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 450,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-10T13:28:16.860094"
+    },
+    {
+      "id": "20260110-007",
+      "title": "实现成就达成条件判断与奖励发放单元测试",
+      "description": "为成就达成条件判断与奖励发放逻辑编写单元测试，覆盖所有成就类型、达成条件和奖励场景。测试用例需要覆盖边界条件和异常情况。验收标准：单元测试覆盖率达到80%以上，所有测试用例均通过，包括各种边界情况和异常情况，例如奖励物品数量不足、背包已满等情况。",
+      "type": "qa",
+      "assignedTo": "qa-tester",
+      "priority": "high",
+      "estimatedLines": 450,
+      "dependencies": [
+        "20260109-004",
+        "20260108-006"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 450,
+        "testsRequired": true,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-10T13:28:16.860096"
+    },
+    {
+      "id": "20260110-008",
+      "title": "实现装备自动出售功能",
+      "description": "实现装备自动出售功能。玩家可以选择自动出售指定品质及以下的装备，当获得满足条件的装备时，系统自动将其出售，并将获得的金币添加到玩家的金币余额中。自动出售可以开关。需要在服务器端进行判断和处理。需要同步更新 OpenAPI 规范文档。验收标准：自动出售功能开关正常，装备出售判断逻辑正确，金币余额正确更新，单元测试覆盖所有自动出售场景，OpenAPI文档同步更新。",
+      "type": "backend",
+      "assignedTo": "backend-dev",
+      "priority": "high",
+      "estimatedLines": 600,
+      "dependencies": [
+        "20260103-020",
+        "20260108-004"
+      ],
+      "validationCriteria": {
+        "minCodeLines": 600,
+        "testsRequired": true,
+        "apiSpecUpdated": true,
+        "frontendBackendSynced": false
+      },
+      "status": "pending",
+      "createdAt": "2026-01-10T13:28:16.860097"
+    },
+    {
+      "id": "20260110-009",
+      "title": "创建自动出售设置UI界面",
+      "description": "创建自动出售设置UI界面，用于显示自动出售的设置选项，并允许玩家进行设置。需要设计UI布局，包括自动出售开关、品质选择下拉框等。UI需要和已有的设置界面风格保持一致。素材需要美观且易于理解。 验收标准：UI布局美观，设置选项显示清晰，自动出售开关和品质选择功能正常，用户体验良好。",
+      "type": "frontend",
+      "assignedTo": "frontend-dev",
+      "priority": "high",
+      "estimatedLines": 400,
+      "dependencies": [],
+      "validationCriteria": {
+        "minCodeLines": 400,
+        "testsRequired": false,
+        "apiSpecUpdated": false,
+        "frontendBackendSynced": true
+      },
+      "status": "pending",
+      "createdAt": "2026-01-10T13:28:16.860098"
     }
   ],
   "completedTasks": [],
